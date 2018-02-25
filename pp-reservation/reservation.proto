@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package reservation;
+
+// serviceはプロトコル定義
+service Reservation {
+    // 予約受付IDから予約情報を返却します
+    rpc GetReservation(ReservationRequest) returns (ReservationResponse);
+}
+
+// messageはデータ型（型 プロパティ名 = プロパティID で定義する）
+// 基本予約情報
+message ReservationResponse {
+    // 予約受付ID
+    int32 reservation_id = 1;
+    // 予約者名
+    string subscriber_name = 2;
+    // 訪問者名
+    string visitor_name = 3;
+    // 部屋ID
+    int32 room_id = 4;
+    // 時間帯
+    string time_zone = 5;
+    // キャンセル状態
+    // bool is_canceled = 6;
+}
+
+// 予約リクエスト情報
+message ReservationRequest {
+    int32 reservation_id = 1;
+}
