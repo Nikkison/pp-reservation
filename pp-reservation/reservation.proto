@@ -6,6 +6,9 @@ package reservation;
 service Reservation {
     // 予約受付IDから予約情報を返却します
     rpc GetReservation(ReservationRequest) returns (ReservationResponse);
+
+    // 予約情報から予約を作成します
+    rpc CreateReservation(CreateReservationRequest) returns (ReservationResponse);
 }
 
 // messageはデータ型（型 プロパティ名 = プロパティID で定義する）
@@ -29,3 +32,6 @@ message ReservationResponse {
 message ReservationRequest {
     int32 reservation_id = 1;
 }
+
+// 予約作成リクエスト
+message CreateReservationRequest {}
