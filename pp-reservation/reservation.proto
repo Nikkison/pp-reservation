@@ -30,8 +30,18 @@ message ReservationResponse {
 
 // 予約リクエスト情報
 message ReservationRequest {
+    // 予約受付ID
     int32 reservation_id = 1;
 }
 
 // 予約作成リクエスト
-message CreateReservationRequest {}
+message CreateReservationRequest {
+    // 予約者名
+    string subscriber_name = 1;
+    // 訪問者名
+    string visitor_name = 2;
+    // 部屋ID
+    int32 room_id = 3;
+    // 時間帯
+    string time_zone = 4;
+}

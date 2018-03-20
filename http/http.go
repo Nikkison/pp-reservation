@@ -42,7 +42,12 @@ func createHandler(w http.ResponseWriter, r *http.Request) {
 	querys := r.URL.Query()
 	log.Print("querys:", querys)
 
-	resv, err := resvConn.CreateReservation(context.Background(), &pb.CreateReservationRequest{})
+	resv, err := resvConn.CreateReservation(context.Background(), &pb.CreateReservationRequest{
+		SubscriberName: "karino",
+		VisitorName:    "alien",
+		RoomId:         1,
+		TimeZone:       "10:00~20:00",
+	})
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
