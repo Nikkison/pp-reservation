@@ -13,7 +13,7 @@ import (
 const (
 	// 予約APIサーバ
 	reservationServerAddress = "localhost:50051"
-	httpServer               = "localhost:50080"
+	httpServer               = ":50080"
 )
 
 var resvConn pb.ReservationClient
@@ -42,12 +42,14 @@ func createHandler(w http.ResponseWriter, r *http.Request) {
 	querys := r.URL.Query()
 	log.Print("querys:", querys)
 
-	resv, err := resvConn.CreateReservation(context.Background(), &pb.CreateReservationRequest{
+	resvReq := pb.CreateReservationRequest{
 		SubscriberName: "karino",
 		VisitorName:    "alien",
 		RoomId:         1,
 		TimeZone:       "10:00~20:00",
-	})
+	}
+
+	resv, err := resvConn.CreateReservation(context.Background(), &resvReq)
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
@@ -79,5 +81,5 @@ func main() {
 	http.HandleFunc("/get", getHandler)
 	// 予約作成（jsonレスポンス）
 	http.HandleFunc("/create", createHandler)
-	log.Fatal(http.ListenAndServe(":3000", nil))
+	log.Fatal(http.ListenAndServe(httpServer, nil))
 }
